@@ -1,4 +1,5 @@
 import cucumber.api.PendingException;
+import cucumber.api.java.After;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -14,6 +15,11 @@ import java.util.concurrent.TimeUnit;
 public class AddToBasketStepDef {
 
     WebDriver driver;
+    @After
+    public void closebrowser()
+    {
+        driver.quit();
+    }
 
     @Given("^I am on the home page$")
     public void i_am_on_the_home_page() throws Throwable {
@@ -48,6 +54,7 @@ public class AddToBasketStepDef {
     @When("^I click on add to basket$")
     public void i_click_on_add_to_basket() throws Throwable {
         driver.findElement(By.cssSelector("#add-to-cart-button")).click();
+        driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS );
     }
 
     @Then("^the item should be add to the basket$")
